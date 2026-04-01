@@ -1,65 +1,53 @@
-# 🐧 Ubuntu Setup
+# Ubuntu Setup
 
-## NVM (Node Version Manager)
+Automated setup scripts for a fresh Ubuntu installation.
 
-- Repository: https://github.com/nvm-sh/nvm
+## Quick Start
+
+```bash
+./install.sh
+```
+
+Select the components you want to install from the interactive menu. Enter numbers separated by spaces, or `7` to install everything.
+
+```
+1) curl + git              (prerequisites)
+2) Oh My ZSH               (ZSH + Oh My ZSH + set as default shell)
+3) NVM                     (requires Oh My ZSH)
+4) ZSH Plugins             (autosuggestions, history-search, syntax-highlight)
+5) Git Configuration       (global user config)
+6) GitHub CLI
+7) Install All
+```
+
+> Options 3 and 4 require Oh My ZSH to be installed first (option 2).
 
 ---
 
-## ZSH + Oh My ZSH
+## Scripts
 
-### Install ZSH
+| Script                           | Description                                            |
+| -------------------------------- | ------------------------------------------------------ |
+| `scripts/install-curl-git.sh`    | Installs curl and git                                  |
+| `scripts/install-ohmyzsh.sh`     | Installs ZSH, Oh My ZSH, and sets ZSH as default shell |
+| `scripts/install-nvm.sh`         | Installs NVM and adds it to `.zshrc`                   |
+| `scripts/install-zsh-plugins.sh` | Clones and activates ZSH plugins                       |
+| `scripts/install-git-config.sh`  | Applies global git configuration                       |
+| `scripts/install-gh-cli.sh`      | Installs GitHub CLI via apt                            |
 
-```bash
-sudo apt update
-sudo apt install zsh
-````
-
-* Oh My ZSH Repository: [https://github.com/ohmyzsh/ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
-
-### Recommended Plugins
-
-* Autosuggestions
-  [https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
-
-* History Substring Search
-  [https://github.com/zsh-users/zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
-
-* Syntax Highlighting
-  [https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
-
----
-
-## Git
-
-### Global Configuration
+Each script can also be run individually:
 
 ```bash
-git config --global user.name "Jonas Dias"
-git config --global user.email "zdias1413@gmail.com"
-git config --global init.defaultBranch main
-git config --global --add oh-my-zsh.hide-info 1
+bash scripts/install-ohmyzsh.sh
 ```
 
 ---
 
-## GitHub CLI
+## References
 
-* Documentation:
-  [https://github.com/cli/cli/blob/trunk/docs/install_linux.md](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
-
----
-
-## Post-installation
-
-### Set ZSH as default shell
-
-```bash
-chsh -s $(which zsh)
-```
-
-### Reload terminal
-
-```bash
-exec zsh
-```
+- [nvm-sh/nvm](https://github.com/nvm-sh/nvm)
+- [ohmyzsh/ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+- [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-users/zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
+- [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [GitHub CLI install docs](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
