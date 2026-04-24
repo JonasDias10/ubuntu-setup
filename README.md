@@ -43,6 +43,44 @@ bash scripts/install-ohmyzsh.sh
 
 ---
 
+## 📌 Fix: Brightness Not Working (Ubuntu + Ryzen + NVIDIA RTX)
+
+On some laptops with Ryzen CPUs and NVIDIA RTX GPUs, the brightness slider may appear but not actually change the screen brightness.
+
+### 🔧 Quick Fix
+
+1. Open the GRUB configuration file:
+
+```bash
+sudo nano /etc/default/grub
+````
+
+2. Find this line:
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+```
+
+3. Replace it with:
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=native"
+```
+
+4. Update GRUB:
+
+```bash
+sudo update-grub
+```
+
+5. Reboot your system:
+
+```bash
+sudo reboot
+```
+
+---
+
 ## References
 
 - [nvm-sh/nvm](https://github.com/nvm-sh/nvm)
