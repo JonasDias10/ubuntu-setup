@@ -43,6 +43,33 @@ bash scripts/install-ohmyzsh.sh
 
 ---
 
+## Testing in Docker
+
+The scripts modify your shell, your git globals and your system packages, so it is safer to try them in an isolated container first instead of running them directly on your machine.
+
+```bash
+./docker-test.sh
+```
+
+This builds a throwaway Ubuntu 24.04 image, runs `install.sh` with every component selected, then runs `verify.sh` to confirm the final state. Nothing in the container touches the host.
+
+| File              | Purpose                                                         |
+| ----------------- | --------------------------------------------------------------- |
+| `Dockerfile.test` | Defines the sandbox image, a plain Ubuntu user with sudo access |
+| `docker-test.sh`  | Builds the image and runs install plus verify in one command    |
+| `verify.sh`       | Confirms curl, git, zsh, Oh My ZSH, NVM, plugins and git config |
+
+You can also run a single script inside the sandbox for a quicker check:
+
+```bash
+docker build -f Dockerfile.test -t ubuntu-setup-test .
+docker run --rm -it ubuntu-setup-test
+```
+
+That drops you into a shell inside the container, from which you can run `./install.sh` or any script under `scripts/` by hand.
+
+---
+
 ## 📌 Fix: Brightness Not Working (Ubuntu + Ryzen + NVIDIA RTX)
 
 On some laptops with Ryzen CPUs and NVIDIA RTX GPUs, the brightness slider may appear but not actually change the screen brightness.
@@ -53,7 +80,7 @@ On some laptops with Ryzen CPUs and NVIDIA RTX GPUs, the brightness slider may a
 
 ```bash
 sudo nano /etc/default/grub
-````
+```
 
 2. Find this line:
 
